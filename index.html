@@ -3,45 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#101a27" />
-  <title>Stick War: Last Stand</title>
+  <title>Block Studio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232d79ac'/%3E%3Cpath d='M13 18h25l13 8v20H26l-13-8z' fill='%23c9e6f4'/%3E%3Cpath d='M13 18l13 8v20L13 38z' fill='%2397c7df'/%3E%3Cpath d='M26 26l25 0-13 8H13z' fill='%23fff'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="game-shell">
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="Stick War Last Stand home"><span class="brand-mark">⚔</span><span>STICK WAR <b>LAST STAND</b></span></a>
-      <div class="mission"><span class="mission-dot"></span><span>CAMPAIGN <b>01</b></span><i></i><span>THE IRON VALLEY</span></div>
-      <div class="top-actions"><button id="soundBtn" class="icon-btn" title="Toggle sound" aria-label="Toggle sound">♫</button><button id="pauseBtn" class="icon-btn" title="Pause (P)" aria-label="Pause">Ⅱ</button><button id="helpBtn" class="icon-btn" title="Controls">?</button></div>
-    </header>
-
-    <section class="stage-wrap">
-      <canvas id="battlefield" width="1280" height="600" aria-label="Stick War battlefield"></canvas>
-      <div class="battle-vignette"></div>
-      <div class="stage-hud">
-        <div class="base-card blue-base"><div class="base-name"><span class="shield-icon">◆</span><span><b>ORDER EMPIRE</b><small>YOUR CITADEL</small></span></div><div class="base-health"><div class="health-track"><i id="playerHealthBar"></i></div><b id="playerHealthText">1000 / 1000</b></div></div>
-        <div class="wave-card"><small>ENEMY ASSAULT</small><b id="waveText">WAVE 01</b><span id="waveStatus">SCOUTS APPROACHING</span></div>
-        <div class="base-card red-base"><div class="base-name"><span class="shield-icon">◆</span><span><b>CHAOS LEGION</b><small>ENEMY CITADEL</small></span></div><div class="base-health"><div class="health-track"><i id="enemyHealthBar"></i></div><b id="enemyHealthText">1000 / 1000</b></div></div>
-      </div>
-      <div class="battle-log" id="battleLog"><span class="log-pip"></span><span id="logText">The valley is yours to command, General.</span></div>
-      <div id="toast" class="toast" aria-live="polite"></div>
-      <div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-panel"><span class="eyebrow">BATTLE PAUSED</span><h2>Hold the line.</h2><p>Your soldiers are waiting for your command.</p><button id="resumeBtn" class="primary-btn">RESUME BATTLE <span>▶</span></button></div></div>
-      <div id="resultOverlay" class="result-overlay hidden"><div class="result-panel"><span class="eyebrow" id="resultEyebrow">VICTORY</span><h2 id="resultTitle">The valley is yours.</h2><p id="resultCopy">The Order stands unbroken.</p><div class="result-stats"><span>ENEMIES DEFEATED <b id="killsStat">0</b></span><span>TIME ELAPSED <b id="timeStat">00:00</b></span></div><button id="restartBtn" class="primary-btn">PLAY AGAIN <span>↻</span></button></div></div>
-      <div id="helpOverlay" class="help-overlay hidden"><div class="help-panel"><button class="close-btn" id="closeHelp" aria-label="Close">×</button><span class="eyebrow">FIELD MANUAL</span><h2>How to win</h2><p>Train an army, protect your citadel, and destroy the Chaos Legion's stronghold.</p><div class="help-grid"><div><b>1</b><span><strong>Mine gold</strong>Train miners to gather gold. They keep working until the mine runs dry.</span></div><div><b>2</b><span><strong>Build your army</strong>Train swordwrath for the front line, archidons for range, and giants to break a stalemate.</span></div><div><b>3</b><span><strong>Command</strong>Use <kbd>A</kbd> to attack and <kbd>H</kbd> to hold your ground. <kbd>P</kbd> pauses.</span></div></div><button class="primary-btn" id="gotItBtn">BACK TO BATTLE <span>→</span></button></div></div>
-    </section>
-
-    <section class="command-deck">
-      <div class="economy"><div class="gold-medallion">✦</div><div><small>TREASURY</small><strong id="goldText">250</strong></div><span class="income" id="incomeText">+0 / sec</span></div>
-      <div class="unit-roster" id="unitRoster"><div class="roster-title">YOUR FORCES <span id="armyCount">0 UNITS</span></div><div id="rosterIcons" class="roster-icons"><span class="empty-roster">Train units to build your army</span></div></div>
-      <div class="training"><div class="training-title">TRAIN UNITS <span>CLICK OR PRESS 1–4</span></div><div class="train-buttons">
-        <button class="train-btn" data-unit="miner" title="Miner — gather gold (1)"><span class="unit-symbol miner-symbol">⛏</span><span class="unit-info"><b>MINER</b><small>Gathers gold</small></span><span class="unit-cost"><i>✦</i>100</span><kbd>1</kbd></button>
-        <button class="train-btn" data-unit="sword" title="Swordwrath — melee (2)"><span class="unit-symbol sword-symbol">⚔</span><span class="unit-info"><b>SWORDWRATH</b><small>Front line</small></span><span class="unit-cost"><i>✦</i>150</span><kbd>2</kbd></button>
-        <button class="train-btn" data-unit="archer" title="Archidon — ranged (3)"><span class="unit-symbol archer-symbol">➶</span><span class="unit-info"><b>ARCHIDON</b><small>Ranged attack</small></span><span class="unit-cost"><i>✦</i>225</span><kbd>3</kbd></button>
-        <button class="train-btn" data-unit="giant" title="Giant — heavy (4)"><span class="unit-symbol giant-symbol">♟</span><span class="unit-info"><b>GIANT</b><small>Heavy hitter</small></span><span class="unit-cost"><i>✦</i>400</span><kbd>4</kbd></button>
-      </div></div>
-      <div class="orders"><div class="training-title">ORDERS <span>COMMAND YOUR ARMY</span></div><div class="order-buttons"><button id="attackBtn" class="order-btn attack-order active"><span>⚑</span><b>ATTACK</b><kbd>A</kbd></button><button id="holdBtn" class="order-btn"><span>▣</span><b>HOLD</b><kbd>H</kbd></button><button id="retreatBtn" class="order-btn"><span>↶</span><b>RETREAT</b><kbd>R</kbd></button></div></div>
-    </section>
-    <footer><span>LAST STAND <i>•</i> IRON VALLEY</span><span>DEFEND YOUR CITADEL. BREAK THEIRS.</span><span>BUILD 1.0</span></footer>
+  <main class="studio">
+    <header class="titlebar"><div class="app-icon">▦</div><b>BLOCK STUDIO</b><span class="file-name">Untitled Place <i>•</i> Saved</span><div class="title-spacer"></div><button id="saveBtn" class="title-action">↧ Save</button><button id="playBtn" class="play-main"><span>▶</span> PLAY</button><button class="window-btn">—</button><button class="window-btn">□</button><button class="window-btn close">×</button></header>
+    <nav class="menu"><button>File</button><button>Edit</button><button>View</button><button>Plugins</button><button>Help</button><span class="menu-tip">Build a world. Then jump in.</span></nav>
+    <section class="ribbon"><div class="ribbon-group"><div class="tool-buttons"><button class="tool active" data-tool="select"><span>⌖</span>Select</button><button class="tool" data-tool="move"><span>✥</span>Move</button><button class="tool" data-tool="delete"><span>⌫</span>Delete</button></div><small>TOOLS</small></div><div class="ribbon-group insert-group"><button id="insertBlock" class="insert-btn"><span class="block-icon">▰</span><b>Block</b><small>PART</small></button><button id="insertSpawn" class="insert-btn"><span class="spawn-icon">✣</span><b>Spawn</b><small>SPAWN</small></button><button id="insertCoin" class="insert-btn"><span class="coin-icon">◉</span><b>Coin</b><small>DECOR</small></button><button id="insertTree" class="insert-btn"><span class="tree-icon">♣</span><b>Tree</b><small>DECOR</small></button><small class="group-label">INSERT</small></div><div class="ribbon-group color-group"><button id="colorBtn" class="color-button"><i></i><span>Part Color</span>⌄</button><small>APPEARANCE</small></div><div class="ribbon-group snap-group"><label><input id="snapToggle" type="checkbox" checked> Grid Snap</label><select id="gridSize"><option value="1">1 stud</option><option value="2">2 studs</option><option value="4">4 studs</option></select><small>SNAP</small></div><div class="ribbon-group test-group"><button id="resetBtn" class="test-btn">↻ Reset World</button><small>TEST</small></div></section>
+    <div class="workspace">
+      <aside class="toolrail"><button class="rail active" title="Explorer">▤</button><button class="rail" title="Terrain">▧</button><button class="rail" title="Asset browser">◈</button><button class="rail" title="Settings">⚙</button><div class="rail-spacer"></div><div class="help-dot" id="helpBtn">?</div></aside>
+      <section class="main-area"><div class="viewport-top"><div><span class="viewport-dot"></span> Workspace <span class="slash">/</span> <b>World</b></div><div class="view-controls"><button id="cameraBtn" title="Reset camera">⌖</button><button id="fullscreenBtn" title="Focus viewport">⛶</button></div></div><div class="viewport-wrap"><canvas id="scene" width="1200" height="720" aria-label="3D world editor"></canvas><div class="viewport-hint" id="hint"><span>✦</span> Click an object to select · Choose Block then click the world to build</div><div id="playOverlay" class="play-overlay hidden"><div class="play-card"><div class="avatar-mini">●</div><b>PLAY TEST</b><span>WASD move <i>·</i> SPACE jump <i>·</i> ESC stop</span><button id="stopBtn">■ STOP TEST</button></div></div><div id="toast" class="toast"></div></div><div class="viewport-status"><span id="statusText">Ready</span><span id="coords">X 0 &nbsp; Y 0 &nbsp; Z 0</span><span>CAMERA: EDITOR</span><span class="zoom-controls"><button id="zoomOut">−</button><b id="zoomValue">100%</b><button id="zoomIn">+</button></span></div></section>
+      <aside class="side-panel"><section class="panel explorer"><header><b>EXPLORER</b><button class="panel-menu">•••</button></header><div class="search"><span>⌕</span><input id="searchInput" placeholder="Filter workspace" /></div><div id="tree" class="tree"></div></section><section class="panel properties"><header><b>PROPERTIES</b><button class="panel-menu">•••</button></header><div id="propertyContent" class="property-content"><div class="property-empty">Select an object to view its properties.</div></div></section></aside>
+    </div>
+    <footer class="output"><div class="output-head"><b>OUTPUT</b><span id="outputMessage">Welcome to Block Studio. Your world is ready.</span><button id="clearOutput">Clear</button><button id="outputToggle">⌄</button></div><div class="output-body"><span class="output-prompt">›</span><span>Ready for commands</span><span class="output-clock">LOCAL SESSION</span></div></footer>
+    <div class="statusbar"><span><i class="status-green"></i> Connected</span><span>PLACE: Untitled</span><span id="objectCount">1 object</span><span class="status-right">BLOCK STUDIO <b>0.1.0</b></span></div>
+    <div id="helpModal" class="modal hidden"><div class="modal-card"><button id="closeHelp" class="modal-close">×</button><small>QUICK START</small><h2>Make something awesome.</h2><p>Choose a part from the Insert ribbon and click in the world to place it. Select parts to change their name, color, and size. Press <kbd>Play</kbd> to explore your creation.</p><div class="help-controls"><span><kbd>W A S D</kbd> move</span><span><kbd>SPACE</kbd> jump</span><span><kbd>ESC</kbd> stop play test</span><span><kbd>DEL</kbd> delete selection</span></div><button id="helpOkay">GOT IT</button></div></div>
   </main>
   <script src="game.js"></script>
 </body>
