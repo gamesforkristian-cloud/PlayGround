@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101616" />
+  <link rel="icon" href="data:," />
+  <title>Stickfront: Legacy — The Last Stand</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Stickfront home"><span class="brand-mark">✦</span><span>STICKFRONT <em>LEGACY</em></span></a>
+      <div class="chapter"><span class="chapter-kicker">THE IRON FRONTIER</span><strong>Chapter I <i>·</i> The Last Stand</strong></div>
+      <div class="top-actions"><span class="live-state"><b></b> BATTLE IN PROGRESS</span><button class="icon-btn" id="soundBtn" aria-label="Toggle sound" title="Sound effects">♫</button><button class="icon-btn" id="pauseBtn" aria-label="Pause game" title="Pause (Space)">Ⅱ</button></div>
+    </header>
+
+    <section class="battle-wrap" aria-label="Battlefield">
+      <canvas id="battle" width="1440" height="760" aria-label="Stickfront battlefield game"></canvas>
+      <div class="battle-vignette"></div>
+      <div class="battle-top-ui">
+        <div class="objective"><span class="objective-icon">⚑</span><div><small>MISSION OBJECTIVE</small><strong>Destroy the enemy statue</strong></div></div>
+        <div class="wave-card"><small>ENEMY WAVE</small><strong id="waveLabel">WAVE 01 <span>·</span> SCOUTS</strong><div class="wave-track"><i id="waveProgress"></i></div></div>
+      </div>
+      <div class="base-label friendly-label"><span class="flag-dot"></span> YOUR CITADEL <small>3,000 HP</small></div>
+      <div class="base-label enemy-label"><span class="flag-dot red"></span> IRONHOLD <small id="enemyHpLabel">3,000 HP</small></div>
+      <div class="center-toast" id="toast" aria-live="polite"></div>
+      <div class="pause-layer hidden" id="pauseLayer"><div class="pause-card"><span class="pause-emblem">Ⅱ</span><small>BATTLE PAUSED</small><h2>Catch your breath.</h2><p>Your soldiers are holding the line.</p><button class="primary-btn" id="resumeBtn">RESUME BATTLE <span>SPACE ↗</span></button></div></div>
+      <div class="end-layer hidden" id="endLayer"><div class="end-card"><span class="end-icon" id="endIcon">✦</span><small id="endEyebrow">BATTLE COMPLETE</small><h2 id="endTitle">The frontier is yours.</h2><p id="endCopy">The Ironhold has fallen.</p><button class="primary-btn" id="restartBtn">FIGHT AGAIN <span>↻</span></button></div></div>
+      <div class="battle-bottom-ui"><span class="tip"><kbd>1</kbd>–<kbd>4</kbd> TRAIN <i>·</i> <kbd>A</kbd> ADVANCE <i>·</i> <kbd>D</kbd> DEFEND <i>·</i> <kbd>SPACE</kbd> PAUSE</span><span class="battle-time" id="battleTime">00:00</span></div>
+    </section>
+
+    <section class="command-deck">
+      <div class="economy"><div class="gold-medallion">◈</div><div class="economy-copy"><small>GOLD RESERVE</small><strong id="goldValue">250</strong></div><div class="income"><span>↗</span><strong id="incomeValue">+12</strong><small>/ MINING</small></div></div>
+      <div class="unit-roster" id="unitRoster" aria-label="Train soldiers"></div>
+      <div class="orders"><small>BATTLE ORDERS</small><div class="order-buttons"><button class="order-btn active" data-order="advance"><span>⚔</span><b>ADVANCE</b><kbd>A</kbd></button><button class="order-btn" data-order="defend"><span>⬟</span><b>DEFEND</b><kbd>D</kbd></button></div></div>
+    </section>
+    <footer class="statusbar"><div><span class="status-dot"></span><span id="statusText">Your troops are ready. Send them forward.</span></div><div class="footer-hint">A STRATEGY GAME <i>·</i> DESKTOP EDITION</div></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
